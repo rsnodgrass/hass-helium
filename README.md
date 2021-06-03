@@ -33,7 +33,6 @@ sensor:
   - platform: helium
     hotspots:
       - 112JbKk4fvYmoSqHR93vRYugjiduT1JrF8EyC86iMUWjUrmW95Mn
-      - xx
 ```
 
 Configure Helium wallet sensors:
