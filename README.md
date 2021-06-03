@@ -68,7 +68,7 @@ This is a community supported custom component integration for Home Assistant. C
 
 ### Feature Requests
 
-* 
+* create sensor for current wallet value (based on Oracle HNT price)
 
 ### See Also
 
