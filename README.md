@@ -1,8 +1,6 @@
 # Helium Blockchain for Home Assistant
 
-# NOTE: THIS IS NOT IMPLEMENTED YET!
-
-![logo]((img/logo@2x.png))
+![Helium Logo](https://github.com/rsnodgrass/hass-helium/blob/master/img/logo@2x.png?raw=true)
 
 ![beta_badge](https://img.shields.io/badge/maturity-Beta-yellow.png)
 ![release_badge](https://img.shields.io/github/release/rsnodgrass/hass-helium.svg)
