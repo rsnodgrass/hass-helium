@@ -1,0 +1,15 @@
+{
+    "domain": "helium",
+    "name": "Helium Hotspot",
+    "version": "0.0.1",
+    "documentation": "https://github.com/rsnodgrass/hass-helium/",
+    "issue_tracker": "https://github.com/rsnodgrass/hass-helium/issues",
+    "requirements": [
+	"beautifulsoup4>=4.9.0",
+	"jsonpath>=0.82",
+	"xmltodict>=0.12.0",
+	"httpx>=0.16.1"
+    ],
+    "dependencies": [],
+    "codeowners": ["@rsnodgrass"]
+}

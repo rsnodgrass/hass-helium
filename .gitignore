@@ -1,0 +1,6 @@
+.DS_Store
+*.pyc
+*.log
+__pycache__
+install
+

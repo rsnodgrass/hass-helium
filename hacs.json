@@ -1,0 +1,5 @@
+{
+  "name": "Helium Hotspot",
+  "domains": ["sensor"],
+  "render_readme": true
+}
