@@ -251,11 +251,8 @@ class HeliumHotspotSensor(Entity):
     async def async_update(self):
         """Get the latest data from the source and updates the state."""
 
-        # trigger an update of this sensor (and all related sensors)
-        client = self._helium_client
-
         # peel back the onion one layer to make access simpler for dependent sensors
-        json = await client.async_get_hotspot_data(self._address).get('data')
+        json = await self._client.async_get_hotspot_data(self._address).get('data')
 
         if not json:
             return
