@@ -49,12 +49,28 @@ NOTE: By default, the sensors update from the Helium Blockchain every 15 minutes
 
 ### Example Lovelace UI
 
+Status of Helium hotspots using [uptime card](https://github.com/dylandoamaral/uptime-card):
+
+![Lovelace Price Example](https://github.com/rsnodgrass/hass-helium/blob/master/img/lovelace-hotspot-status.png?raw=true)
+
 ```yaml
-entities:
-  - entity: sensor.helium_hotspot_name
-type: entities
-title: Helium
-show_header_toggle: false
+type: custom:uptime-card
+entity: sensor.helium_rough_chili_bird
+icon: mdi:router-wireless
+ok: online
+ko: offline
+ko_icon: mdi:router-wireless-off
+hours_to_show: 24
+status_adaptive_color: true
+color:
+  icon: grey
+show:
+  icon: true
+  status: false
+  timeline: true
+  average: true
+title_adaptive_color: true
+name: Rough Chili Bird
 ```
 
 Track the price of Helium HNT:
