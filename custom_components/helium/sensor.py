@@ -121,8 +121,8 @@ class HeliumPriceSensor(Entity):
         if json:
             data = json['data']
             self._state = round(int(data['price']) / USD_DIVISOR, 2)
-            self._attr[ATTR_TIMESTAMP] = data['timestamp']
-            self._attr[ATTR_BLOCK] = int(data['block'])
+            self._attrs[ATTR_TIMESTAMP] = data['timestamp']
+            self._attrs[ATTR_BLOCK] = int(data['block'])
 
     @property
     def device_state_attributes(self):
