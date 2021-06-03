@@ -18,9 +18,12 @@ from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.restore_state import RestoreEntity
 
-from .client import HeliumClient
+from .client import SimpleHeliumClient
 from .const import (
+    ATTR_ADDRESS,
     ATTR_ATTRIBUTION,
+    ATTR_BLOCK,
+    ATTR_TIMESTAMP,
     ATTRIBUTION,
     CONF_TIMEOUT,
     CONF_WALLET,
@@ -59,14 +62,21 @@ async def async_setup_platform(
 
     load_all_hotspots_for_wallets = True
 
-    if wallets:
-        if load_all_hotspots_for_wallets:
-            #for wallest.split()
-            LOG.warning(f"Wallets {wallets} configured, loading all hotspots")
-    
-    client = HeliumClient(timeout=timeout)
-
     sensors = []
+    client = SimpleHeliumClient(timeout=timeout)
+
+    sensors.append( HeliumPriceSensor(hass, client, async_add_entities_cb) )
+
+    if wallets:
+        for wallet_address in wallets:
+            # FIXME: create sensor for the wallet
+
+            if load_all_hotspots_for_wallets:
+                data = await client.async_get_wallet_data(wallet_address)
+                LOG.warning(f"Wallet {wallet_address} loaded: {data}")
+                #for hotspot in hotspots:
+                #hotspots.append(hotspot_address)
+
     for hotspot_address in hotspots:
         # FIXM
         # create the core Helium Hotspot sensor, which is responsible for updating its associated sensors
@@ -75,40 +85,103 @@ async def async_setup_platform(
     async_add_entities_callback(sensors, True)
 
 
-class HeliumHotspotSensor(Entity):
-    """Helium hotspot core sensor (and adds related sensors)"""
+# FIXME: update price every N minutes (default 2)
+class HeliumPriceSensor(Entity):
+    """Helium HNT price sensor (from Oracle)"""
 
-    def __init__(
-        self, hass, config, hotspot_address, helium_client, async_add_entities_callback
-    ):
-        """Initialize the Helium Hotspot service sensor."""
+    def __init__(self, hass, helium_client, async_add_entities_callback):
         self.hass = hass
 
-        self._address = hotspot_address
-        self._unique_id = hotspot_address
-
-        # FIXME: get name from the websevice
-        self._name = hotspot_address
-
-        self._managed_sensors = {}
-        self._attrs = {
-            ATTR_ATTRIBUTION: ATTRIBUTION,
-            'address': hotspot_address
-        }
+        self._unique_id = 'helium_oracle_hnt_price'
+        self._name = 'Helium HNT Oracle Price'
+        self._attrs = { ATTR_ATTRIBUTION: ATTRIBUTION }
 
         self._client = helium_client
         self._async_add_entities_callback = async_add_entities_callback
-        self._soup = None
+        self._state = None
 
     @property
     def name(self):
         """Return the name of the sensor."""
-        return "Helium: " + self._name
+        return self._name
+
+    @property
+    def state(self):
+        """Current Helium HNT price"""
+        return self._state
+
+    @property
+    def unit_of_measurement(self):
+        """HNT Oracle price is always in USD"""
+        return 'USD'
+
+    @property
+    def should_poll(self):
+        return True
+
+    async def async_update(self):
+        """Get the latest data from the source and updates the state."""
+
+        # trigger an update of this sensor (and all related sensors)
+        client = self._helium_client
+        json = await client.async_get_oracle_price()
+
+        if json:
+            data = json['data']
+            self._state = int(data['price']) / 100000000
+            self._attr[ATTR_TIMESTAMP] = data['timestamp']
+            self._attr[ATTR_BLOCK] = int(data['block'])
+
+    @property
+    def device_state_attributes(self):
+        """Return the any attributes."""
+        return self._attrs
+
+
+class HeliumHotspotSensor(Entity):
+    """Helium hotspot core sensor (and adds related sensors)"""
+
+    def __init__(self, hass, config, hotspot_address, helium_client, async_add_entities_callback):
+        """Initialize the Helium Hotspot service sensor."""
+        self.hass = hass
+
+        self._address = hotspot_address
+        self._unique_id = f"helium_{hotspot_address}"
+
+        self._managed_sensors = {}
+        self._attrs = {
+            ATTR_ATTRIBUTION: ATTRIBUTION,
+            ATTR_ADDRESS: hotspot_address
+        }
+
+        self._client = helium_client
+        self._async_add_entities_callback = async_add_entities_callback
+
+        # get name from the websevice
+        json = await helium_client.async_get_hotspot_data(self._address)
+        if json:
+            self._json = json['data']
+            self._name = 'Helium ' + self._json['name']
+            self._state = self._json['status']['online']
+        else:
+            self._json = None
+            self._name = hotspot_address
+            self._state = None        
+
+        # create all the dependent sensors
+
+        # FIXME: Diff URL for reward_scale
+        # https://api.helium.io/v1/hotspots/{address}}/rewards/sum?min_time=2021-06-02T08:09:39Z
+
+    @property
+    def name(self):
+        """Return the name of the sensor."""
+        return "Helium " + self._name
 
     @property
     def state(self):
         """Return the log types being tracked in Helium Hotspot."""
-        return self._managed_sensors.keys()
+        return self._state
 
     @property
     def icon(self):
@@ -123,41 +196,74 @@ class HeliumHotspotSensor(Entity):
 
         # trigger an update of this sensor (and all related sensors)
         client = self._helium_client
-        self._soup = await client.async_get_hotspot_data(self._address)
-        # FIXME: trigger dependancies
+
+        # peel back the onion one layer to make access simpler for dependent sensors
+        json = await client.async_get_hotspot_data(self._address).get('data')
+
+        if not json:
+            return
+        self._json = json
+
+        self._name = json['name']
+        self._state = json['status']['online']
+
+        # copy useful attributes for the hotspot
+        copy_attributes = [ 'block', 'reward_scale', 'owner', 'last_poc_challenge',  ]
+        for attr in copy_attributes:
+            self._attrs[attr] = json[attr]
+
+        # FIXME: trigger dependancies to update
 
     @property
     def device_state_attributes(self):
         """Return the any state attributes."""
         return self._attrs
 
-    async def get_sensor_entity(self, sensor_type):
-        sensor = self._managed_sensors.get(sensor_type, None)
-        if sensor:
-            return sensor
+    @property
+    def json(self):
+        """Return the JSON structure from last hotspot update"""
+        return self._json
 
-        name = self._name + " " + config[ATTR_NAME]
 
-        hotspot_id = "1"
-        
-        sensor = UpdatableSensor(self.hass, hotspot_id, name, config, sensor_type)
-        self._managed_sensors[sensor_type] = sensor
+class DependentSensor(RestoreEntity):
+    """Representation of a sensor whose state is dependent on another sensor's data."""
 
-        # register sensor with Home Assistant (async callback requires passing to loop)
-        self._async_add_entities_callback([sensor], True)
+    def __init__(self, hass, name, sensor_type, unique_id, update_trigger,  resolver_function):
+        """Initialize the sensor."""
+        super().__init__()
 
-        return sensor
+        self.hass = hass
 
-    async def _update_sensor_callback(self, log_type, timestamp, state):
-        """Update the sensor with the details from the log entry"""
-        sensor = await self.get_sensor_entity(log_type)
-        if sensor and sensor.state != state:
-            LOG.info(f"{self._name} {log_type}={state} (timestamp={timestamp})")
-            sensor.inject_state(state, timestamp)
+        self._name = name
+        self._sensor_type = sensor_type
+        self._unique_id = unique_id
+
+        self._update_trigger = update_trigger
+
+        self._state = None
+        self._resolver_function = resolver_function
+
+        self._attrs = { ATTR_ATTRIBUTION: ATTRIBUTION }
+
+        # FIXME: listen to update trigger for updates
 
     @property
-    def sensor_names(self):
-        return self._managed_sensors.keys()
+    def name(self):
+        """Return the name of the sensor."""
+        return self._name
+
+    @property
+    def unique_id(self):
+        return self._unique_id
+
+    @property
+    def should_poll(self):
+        return True  # FIXME: get scheduled updates working below
+
+    @property
+    def device_state_attributes(self):
+        """Return the any state attributes."""
+        return self._attrs
 
 
 class UpdatableSensor(RestoreEntity):
@@ -174,7 +280,7 @@ class UpdatableSensor(RestoreEntity):
         self._state = None
         self._unique_id = unique_id
 
-        self._attrs = {ATTR_ATTRIBUTION: ATTRIBUTION}
+        self._attrs = { ATTR_ATTRIBUTION: ATTRIBUTION }
 
     @property
     def name(self):
@@ -210,7 +316,7 @@ class UpdatableSensor(RestoreEntity):
 
     def inject_state(self, state, timestamp):
         state_changed = self._state != state
-        self._attrs[ATTR_LOG_TIMESTAMP] = timestamp
+        self._attrs[ATTR_TIMESTAMP] = timestamp
 
         if state_changed:
             self._state = state

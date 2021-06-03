@@ -4,7 +4,10 @@ DOMAIN = 'helium'
 
 ATTRIBUTION = 'Data from Helium Blockchain'
 
+ATTR_ADDRESS = 'address'
 ATTR_ATTRIBUTION = 'attribution'
+ATTR_BLOCK = 'block'
+ATTR_TIMESTAMP = 'timestamp'
 
 CONF_WALLET = 'wallets'
 CONF_HOTSPOT = 'hotspots'
