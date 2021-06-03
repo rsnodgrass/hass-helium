@@ -413,9 +413,9 @@ class UpdatableSensor(RestoreEntity):
 #        if ATTR_LOG_TIMESTAMP in state.attributes:
 #            self._attrs[ATTR_LOG_TIMESTAMP] = state.attributes[ATTR_LOG_TIMESTAMP]
 
-        async_dispatcher_connect(
-            self.hass, DATA_UPDATED, self._schedule_immediate_update
-        )
+#        async_dispatcher_connect(
+#            self.hass, DATA_UPDATED, self._schedule_immediate_update
+#        )
 
     @callback
     def _schedule_immediate_update(self):
