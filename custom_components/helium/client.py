@@ -17,9 +17,8 @@ NETWORK_STATS_URL = "https://explorer.helium.foundation/api/stats"
 ORACLE_PRICE_URL = "https://api.helium.io/v1/oracle/prices/current"
 
 class HeliumClient:
-    def __init__(self, url, name=DEFAULT_NAME, timeout=DEFAULT_TIMEOUT):
-        self._url = url
-        self._name = name
+    def __init__(self, timeout=DEFAULT_TIMEOUT):
+        self._name = name 
         self._timeout = timeout
 
         self._wallets = []

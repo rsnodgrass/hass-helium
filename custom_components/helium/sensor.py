@@ -18,13 +18,13 @@ from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.restore_state import RestoreEntity
 
-from .client import Helium BlockchainClient
+from .client import HeliumClient
 from .const import (
     ATTR_ATTRIBUTION,
-    ATTR_DESCRIPTION,
-    ATTR_LOG_TIMESTAMP,
     ATTRIBUTION,
     CONF_TIMEOUT,
+    CONF_WALLET,
+    CONF_HOTSPOT,
     DEFAULT_NAME,
     DEFAULT_TIMEOUT,
     DOMAIN,
@@ -40,31 +40,40 @@ SCAN_INTERVAL = timedelta(minutes=15)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
-        vol.Required(CONF_URL): cv.string,
-        vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
+        vol.Optional(CONF_WALLET): cv.string,
+        vol.Optional(CONF_HOTSPOT): cv.string,
         vol.Optional(CONF_TIMEOUT, default=DEFAULT_TIMEOUT): cv.positive_int
     }
 )
-
 
 async def async_setup_platform(
     hass, config, async_add_entities_callback, discovery_info=None
 ):
     """Set up the Helium Hotspot sensor integration."""
-    url = config.get(CONF_URL)
-    name = config.get(CONF_NAME)
+    wallets = config.get(CONF_WALLET)
+    hotspots = config.get(CONF_HOTSPOT)
     timeout = config.get(CONF_TIMEOUT)
 
-    client = Helium BlockchainClient(url, name=name, timeout=timeout)
+    load_all_hotspots_for_wallets = True
+
+    if wallets:
+        if load_all_hotspots_for_wallets:
+            #for wallest.split()
+            LOG.warning(f"Wallets {wallets} configured, loading all hotspots")
+    
+    if hotspots:
+        LOG.warning(f"Hotspots {hotspots}")
+
+    client = HeliumClient(url, timeout=timeout)
 
     # create the core Helium Hotspot service sensor, which is responsible for updating all other sensors
-    sensor = Helium BlockchainServiceSensor(
+    sensor = HeliumBlockchainServiceSensor(
         hass, config, name, client, async_add_entities_callback
     )
     async_add_entities_callback([sensor], True)
 
 
-class Helium BlockchainServiceSensor(Entity):
+class HeliumBlockchainServiceSensor(Entity):
     """Sensor monitoring the Helium Blockchain and updating any related sensors"""
 
     def __init__(
