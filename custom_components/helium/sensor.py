@@ -54,7 +54,9 @@ async def async_setup_platform(hass, config, async_add_entities_cb, discovery_in
     sensors = []
     client = SimpleHeliumClient(timeout=timeout)
 
-    sensors.append( HeliumPriceSensor(hass, client, async_add_entities_cb) )
+    # FIXME: save price sensor as a global sensor that can be referenced for any HNT->USD conversions
+    price_sensor = HeliumPriceSensor(hass, client, async_add_entities_cb)
+    sensors.append( price_sensor )
 
     if wallets:
         for wallet_address in wallets:
