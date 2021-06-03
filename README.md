@@ -1,4 +1,4 @@
-# Helium Hotspot for Home Assistant
+# Helium Blockchain for Home Assistant
 
 # NOTE: THIS IS NOT IMPLEMENTED YET!
 
