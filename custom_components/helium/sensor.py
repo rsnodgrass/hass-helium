@@ -61,7 +61,8 @@ async def async_setup_platform(hass, config, async_add_entities_cb, discovery_in
             sensors.append( HeliumWalletSensor(hass, config, wallet_address, client, async_add_entities_cb) )
 
             if create_hotspot_sensors_for_wallet:
-                data = await client.async_get_wallet_hotspots(wallet_address)['data']
+                response = await client.async_get_wallet_hotspots(wallet_address)
+                data = response['data']
 
                 for hotspot_info in data:
                     hotspot_address = hotspot_info['address']
@@ -184,7 +185,8 @@ class HeliumWalletSensor(Entity):
         """Get the latest data from the source and updates the state."""
 
         # peel back the onion one layer to make access simpler for dependent sensors
-        json = await self._client.async_get_wallet_data(self._address)['data']
+        response = await self._client.async_get_wallet_data(self._address)
+        json = response['data']
 
         if not json:
             return
@@ -265,7 +267,8 @@ class HeliumHotspotSensor(Entity):
         """Get the latest data from the source and updates the state."""
 
         # peel back the onion one layer to make access simpler for dependent sensors
-        json = await self._client.async_get_hotspot_data(self._address)['data']
+        response = await self._client.async_get_hotspot_data(self._address)
+        json = response['data']
 
         if not json:
             return
