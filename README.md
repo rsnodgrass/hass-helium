@@ -1,5 +1,8 @@
 # Helium Hotspot for Home Assistant
 
+# NOTE: THIS IS NOT IMPLEMENTED YET!
+
+
 ![beta_badge](https://img.shields.io/badge/maturity-Beta-yellow.png)
 ![release_badge](https://img.shields.io/github/release/rsnodgrass/hass-helium.svg)
 ![release_date](https://img.shields.io/github/release-date/rsnodgrass/hass-helium.svg)
