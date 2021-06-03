@@ -12,7 +12,7 @@
 [![Buy Me A Coffee](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://buymeacoffee.com/DYks67r)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WREP29UDAMB6G)  
 
-Creates sensors to monitor Helium hotspots.
+Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/544e97e6), Helium blockchain wallets, and the Helium HNT/USD Oracle price.
 
 ## Installation
 
@@ -71,4 +71,4 @@ show_header_toggle: false
 ### See Also
 
 * [Helium](https://helium.com/)
-* Helium hotspot referer link
+* [Order Helium hotspot from RAK Wireless](https://rakwireless.kckb.st/544e97e6)
