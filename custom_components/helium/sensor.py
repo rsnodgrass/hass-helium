@@ -37,8 +37,6 @@ from .const import (
 
 LOG = logging.getLogger(__name__)
 
-DATA_UPDATED = "helium_data_updated"
-
 SCAN_INTERVAL = timedelta(minutes=15)
 
 USD_DIVISOR = 100000000
@@ -412,8 +410,8 @@ class UpdatableSensor(RestoreEntity):
         LOG.debug(f"Restored sensor {self._name} previous state {self._state}")
 
         # restore attributes
-        if ATTR_LOG_TIMESTAMP in state.attributes:
-            self._attrs[ATTR_LOG_TIMESTAMP] = state.attributes[ATTR_LOG_TIMESTAMP]
+#        if ATTR_LOG_TIMESTAMP in state.attributes:
+#            self._attrs[ATTR_LOG_TIMESTAMP] = state.attributes[ATTR_LOG_TIMESTAMP]
 
         async_dispatcher_connect(
             self.hass, DATA_UPDATED, self._schedule_immediate_update
