@@ -28,9 +28,7 @@ from .const import (
     CONF_TIMEOUT,
     CONF_WALLET,
     CONF_HOTSPOT,
-    DEFAULT_NAME,
     DEFAULT_TIMEOUT,
-    DOMAIN,
     ICON_HOTSPOT,
     ICON_WALLET
 )
