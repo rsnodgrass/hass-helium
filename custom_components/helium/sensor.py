@@ -68,15 +68,13 @@ async def async_setup_platform(hass, config, async_add_entities_cb, discovery_in
 
     if wallets:
         for wallet_address in wallets:
-            sensors.append( HeliumWalletSensor(hass, config, wallet_address, client, async_add_entities_cb)
+            sensors.append( HeliumWalletSensor(hass, config, wallet_address, client, async_add_entities_cb) )
 
             if create_hotspot_sensors_for_wallet:
                 data = await client.async_get_wallet_data(wallet_address)
                 LOG.warning(f"Wallet {wallet_address} loaded: {data}")
                 #for hotspot in hotspots:
                 #hotspots.append(hotspot_address)
-            else:
-                LOG.warning("What?")
 
     for hotspot_address in hotspots:
         # create the core Helium Hotspot sensor, which is responsible for updating its associated sensors
