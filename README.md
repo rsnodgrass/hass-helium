@@ -59,7 +59,7 @@ show_header_toggle: false
 
 Track the price of Helium HNT over the last week:
 
-![Lovelace Price Example](https://github.com/rsnodgrass/hass-helium/blob/master/img/price-lovelace.png?raw=true)
+![Lovelace Price Example](https://github.com/rsnodgrass/hass-helium/blob/master/img/lovelace-price.png?raw=true)
 
 ```yaml
 animate: true
@@ -79,6 +79,22 @@ type: custom:mini-graph-card
 
 For example on custom price alerts, see [example stock alert](https://blog.kevineifinger.de/archive/2019/10/17/Using-Homeassistant-As-My-Self-Hosted-Stock-Alert.html).
 
+Helium wallet size per day over last 7 days:
+
+```
+entities:
+  - entity: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+    name: Wallet HNT
+hours_to_show: 168
+icon: mdi:cash
+name: Helium Wallet
+group_by: date
+show:
+  graph: bar
+  icon: false
+  state: true
+type: custom:mini-graph-card
+```
 
 ## Support
 
