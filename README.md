@@ -57,7 +57,7 @@ title: Helium
 show_header_toggle: false
 ```
 
-Track the price of Helium HNT over the last week:
+Track the price of Helium HNT:
 
 ![Lovelace Price Example](https://github.com/rsnodgrass/hass-helium/blob/master/img/lovelace-price.png?raw=true)
 
@@ -68,7 +68,9 @@ entities:
     name: HNT/USD
 graph: line
 hour24: true
-hours_to_show: 168
+font_size: 75
+hours_to_show: 24
+points_per_hour: 12
 name: Helium HNT/USD
 show:
   extrema: true
