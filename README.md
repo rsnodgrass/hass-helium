@@ -57,6 +57,29 @@ title: Helium
 show_header_toggle: false
 ```
 
+Track the price of Helium HNT over the last week:
+
+![Lovelace Price Example](https://github.com/rsnodgrass/hass-helium/blob/master/img/price-lovelace.png?raw=true)
+
+```yaml
+animate: true
+entities:
+  - entity: sensor.helium_hnt_oracle_price
+    name: HNT/USD
+graph: line
+hour24: true
+hours_to_show: 168
+name: Helium HNT/USD
+show:
+  extrema: true
+  icon: false
+  name: true
+type: custom:mini-graph-card
+```
+
+For example on custom price alerts, see [example stock alert](https://blog.kevineifinger.de/archive/2019/10/17/Using-Homeassistant-As-My-Self-Hosted-Stock-Alert.html).
+
+
 ## Support
 
 This is a community supported custom component integration for Home Assistant. Code improvents and Pull Requests are appreciated.
