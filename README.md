@@ -20,14 +20,14 @@ Make sure [Home Assistant Community Store (HACS)](https://github.com/custom-comp
 
 ### Configuration
 
-The bare minimum configuration creates several sensors to track the Helium blockchange, notably the HNT/USD Oracle price.
+The bare minimum configuration creates general sensors to track the Helium blockchange, notably the HNT/USD Oracle price.
 
 ```yaml
 sensor:
   - platform: helium
 ```
 
-Individual Helium hotspots can be also be monitored:
+Configure Helium hotspot sensors:
 
 ```yaml
 sensor:
@@ -37,7 +37,7 @@ sensor:
       - xx
 ```
 
-And the state of Helium wallets can be monitored:
+Configure Helium wallet sensors:
 
 ```yaml
 sensor:
