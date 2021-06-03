@@ -81,7 +81,7 @@ class HeliumPriceSensor(Entity):
     def __init__(self, hass, helium_client, async_add_entities_callback):
         self.hass = hass
 
-        self._unique_id = 'helium_oracle_hnt_price'
+        self._unique_id = 'helium_hnt_oracle_price'
         self._name = 'Helium HNT Oracle Price'
         self._attrs = { ATTR_ATTRIBUTION: ATTRIBUTION }
 
@@ -170,8 +170,8 @@ class HeliumWalletSensor(Entity):
 
     @property
     def unit_of_measurement(self):
-        """HNT Oracle price is always in USD"""
-        return 'USD'
+        """HNT"""
+        return 'HNT'
 
     @property
     def icon(self):
