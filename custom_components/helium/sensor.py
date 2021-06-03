@@ -38,18 +38,19 @@ DATA_UPDATED = "helium_data_updated"
 
 SCAN_INTERVAL = timedelta(minutes=15)
 
+
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
         # FIXME: rather than specifying sensor: - platform: helium, this should be under helium: domain
         # FIXME: ensure WALLET or HOTSPOT is specified
-        vol.Optional(CONF_WALLET): cv.string,
-        vol.Optional(CONF_HOTSPOT): cv.string,
+        vol.Optional(CONF_WALLET): [cv.string],
+        vol.Required(CONF_HOTSPOT): [cv.string],
         vol.Optional(CONF_TIMEOUT, default=DEFAULT_TIMEOUT): cv.positive_int
     }
 )
 
 async def async_setup_platform(
-    hass, config, async_add_entities_callback, discovery_info=None
+    hass, config, async_add_entities_cb, discovery_info=None
 ):
     """Set up the Helium Hotspot sensor integration."""
     wallets = config.get(CONF_WALLET)
@@ -63,33 +64,41 @@ async def async_setup_platform(
             #for wallest.split()
             LOG.warning(f"Wallets {wallets} configured, loading all hotspots")
     
-    if hotspots:
-        LOG.warning(f"Hotspots {hotspots}")
+    client = HeliumClient(timeout=timeout)
 
-    client = HeliumClient(url, timeout=timeout)
+    sensors = []
+    for hotspot_address in hotspots:
+        # FIXM
+        # create the core Helium Hotspot sensor, which is responsible for updating its associated sensors
+        sensors.append( HeliumHotspotSensor(hass, config, hotspot_address, client, async_add_entities_cb) )
 
-    # create the core Helium Hotspot service sensor, which is responsible for updating all other sensors
-    sensor = HeliumBlockchainServiceSensor(
-        hass, config, name, client, async_add_entities_callback
-    )
-    async_add_entities_callback([sensor], True)
+    async_add_entities_callback(sensors, True)
 
 
-class HeliumBlockchainServiceSensor(Entity):
-    """Sensor monitoring the Helium Blockchain and updating any related sensors"""
+class HeliumHotspotSensor(Entity):
+    """Helium hotspot core sensor (and adds related sensors)"""
 
     def __init__(
-        self, hass, config, name, helium_client, async_add_entities_callback
+        self, hass, config, hotspot_address, helium_client, async_add_entities_callback
     ):
         """Initialize the Helium Hotspot service sensor."""
         self.hass = hass
-        self._name = name
+
+        self._address = hotspot_address
+        self._unique_id = hotspot_address
+
+        # FIXME: get name from the websevice
+        self._name = hotspot_address
 
         self._managed_sensors = {}
-        self._attrs = {ATTR_ATTRIBUTION: ATTRIBUTION, CONF_URL: config.get(CONF_URL)}
+        self._attrs = {
+            ATTR_ATTRIBUTION: ATTRIBUTION,
+            'address': hotspot_address
+        }
 
-        self._helium_client = helium_client
+        self._client = helium_client
         self._async_add_entities_callback = async_add_entities_callback
+        self._soup = None
 
     @property
     def name(self):
@@ -114,13 +123,8 @@ class HeliumBlockchainServiceSensor(Entity):
 
         # trigger an update of this sensor (and all related sensors)
         client = self._helium_client
-        soup = await client.async_update()
-
-        # iterate through all the log entries and update sensor states
-        timestamp = await client.process_log_entry_callbacks(
-            soup, self._update_sensor_callback
-        )
-        self._attrs[ATTR_LOG_TIMESTAMP] = timestamp
+        self._soup = await client.async_get_hotspot_data(self._address)
+        # FIXME: trigger dependancies
 
     @property
     def device_state_attributes(self):

@@ -24,21 +24,33 @@ class HeliumClient:
         self._wallets = []
         self._hotspots = []
 
-    async def async_update(self):
-        """Fetch latest data from the Helium Blockchain"""
-
+    async def async_get(self, url):
+        """Fetch JSON data from URL"""
         async with httpx.AsyncClient() as client:
-
-            for hotspot in self._hotspots:
-                url = HOTSPOT_URL + hotspot
-                LOG.info(f"GET {url}")
-                response = await client.request("GET", self._url, timeout=self._timeout)
-                LOG.debug(f"GET {url} response: {response.status_code}")
+            LOG.info(f"GET {url}")
+            response = await client.request("GET", url, timeout=self._timeout)
+            LOG.debug(f"GET {url} response: {response.status_code}")
 
             if response.status_code == httpx.codes.OK:
                 return BeautifulSoup(response.text, "html.parser")
 
-            return None
+        return None
+
+    async def async_get_hotspot_data(self, address):
+        url = HOTSPOT_URL + address
+        return await self.async_get(url)
+
+    async def async_get_wallet_data(self, address):
+        url = WALLET_URL + address
+        return await self.async_get(url)
+
+    async def async_get_oracle_price(self):
+        url = ORACLE_PRICE_URL
+        return await self.async_get(url)
+
+    async def async_get_network_stats(self):
+        url = NETWORK_STATS_URL
+        return await self.async_get(url)
 
     @property
     def name(self):

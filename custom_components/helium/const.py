@@ -6,8 +6,8 @@ ATTRIBUTION = 'Data from Helium Blockchain'
 
 ATTR_ATTRIBUTION = 'attribution'
 
-CONF_WALLET = 'wallet'
-CONF_HOTSPOT = 'hotspot'
+CONF_WALLET = 'wallets'
+CONF_HOTSPOT = 'hotspots'
 
 #ICON_HOTSPOT = "mdi:access-point"
 ICON_HOTSPOT = 'mdi:router-wireless'
