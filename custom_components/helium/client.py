@@ -11,10 +11,11 @@ from .const import CONF_TIMEOUT, DEFAULT_NAME, DEFAULT_TIMEOUT
 LOG = logging.getLogger(__name__)
 
 # see https://documenter.getpostman.com/view/8776393/SVmsTzP6?version=latest
-WALLET_URL = "https://explorer.helium.foundation/api/accounts/"
+WALLET_URL = "https://api.helium.io/v1/accounts/"
 HOTSPOT_URL = "https://api.helium.io/v1/hotspots/"
 NETWORK_STATS_URL = "https://explorer.helium.foundation/api/stats"
 ORACLE_PRICE_URL = "https://api.helium.io/v1/oracle/prices/current"
+HOTSPOTS_FOR_WALLET_URL = "https://api.helium.io/v1/accounts/{address}/hotspots
 
 class SimpleHeliumClient:
     def __init__(self, timeout=DEFAULT_TIMEOUT):

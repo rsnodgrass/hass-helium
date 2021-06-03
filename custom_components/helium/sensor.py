@@ -41,6 +41,7 @@ DATA_UPDATED = "helium_data_updated"
 
 SCAN_INTERVAL = timedelta(minutes=15)
 
+USD_DIVISOR = 100000000
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -52,15 +53,13 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     }
 )
 
-async def async_setup_platform(
-    hass, config, async_add_entities_cb, discovery_info=None
-):
+async def async_setup_platform(hass, config, async_add_entities_cb, discovery_info=None):
     """Set up the Helium Hotspot sensor integration."""
     wallets = config.get(CONF_WALLET)
     hotspots = config.get(CONF_HOTSPOT)
     timeout = config.get(CONF_TIMEOUT)
 
-    load_all_hotspots_for_wallets = True
+    create_hotspot_sensors_for_wallet = False
 
     sensors = []
     client = SimpleHeliumClient(timeout=timeout)
@@ -69,21 +68,21 @@ async def async_setup_platform(
 
     if wallets:
         for wallet_address in wallets:
-            # FIXME: create sensor for the wallet
+            sensors.append( HeliumWalletSensor(hass, config, wallet_address, client, async_add_entities_cb)
 
-            if load_all_hotspots_for_wallets:
+            if create_hotspot_sensors_for_wallet:
                 data = await client.async_get_wallet_data(wallet_address)
                 LOG.warning(f"Wallet {wallet_address} loaded: {data}")
                 #for hotspot in hotspots:
                 #hotspots.append(hotspot_address)
+            else:
+                LOG.warning("What?")
 
     for hotspot_address in hotspots:
-        # FIXM
         # create the core Helium Hotspot sensor, which is responsible for updating its associated sensors
         sensors.append( HeliumHotspotSensor(hass, config, hotspot_address, client, async_add_entities_cb) )
 
     async_add_entities_callback(sensors, True)
-
 
 # FIXME: update price every N minutes (default 2)
 class HeliumPriceSensor(Entity):
@@ -128,7 +127,7 @@ class HeliumPriceSensor(Entity):
 
         if json:
             data = json['data']
-            self._state = int(data['price']) / 100000000
+            self._state = round(int(data['price']) / USD_DIVISOR, 2)
             self._attr[ATTR_TIMESTAMP] = data['timestamp']
             self._attr[ATTR_BLOCK] = int(data['block'])
 
@@ -138,17 +137,95 @@ class HeliumPriceSensor(Entity):
         return self._attrs
 
 
+class HeliumWalletSensor(Entity):
+    """Helium wallet core sensor (adds related sensors)"""
+
+    def __init__(self, hass, config, wallet_address, helium_client, async_add_entities_callback):
+        """Initialize the Helium wallet sensor."""
+        self.hass = hass
+
+        self._address = wallet_address
+        self._unique_id = f"helium_wallet_{wallet_address}"
+
+        self._attrs = {
+            ATTR_ATTRIBUTION: ATTRIBUTION,
+            ATTR_ADDRESS: wallet_address
+        }
+
+        self._client = helium_client
+        self._async_add_entities_callback = async_add_entities_callback
+
+        self._json = None
+        self._name = f"Helium Wallet {wallet_address}"
+        self._state = None        
+
+        # FIXME: create all the dependent sensors
+
+    @property
+    def name(self):
+        """Return the name of the sensor."""
+        return self._name
+
+    @property
+    def state(self):
+        """Return current wallet balance"""
+        return self._state
+
+    @property
+    def unit_of_measurement(self):
+        """HNT Oracle price is always in USD"""
+        return 'USD'
+
+    @property
+    def icon(self):
+        return ICON_WALLET
+
+    @property
+    def should_poll(self):
+        return True
+
+    async def async_update(self):
+        """Get the latest data from the source and updates the state."""
+
+        # trigger an update of this sensor (and all related sensors)
+        client = self._helium_client
+
+        # peel back the onion one layer to make access simpler for dependent sensors
+        json = await client.async_get_wallet_data(self._address)['data']
+
+        if not json:
+            return
+        self._json = json
+
+        self._state = round(int(json['balance']) / USD_DIVISOR, 2)
+
+        # copy useful attributes for the hotspot
+        copy_attributes = [ 'block', 'dc_balance' ]
+        for attr in copy_attributes:
+            self._attrs[attr] = json[attr]
+
+    @property
+    def device_state_attributes(self):
+        """Return the any state attributes."""
+        return self._attrs
+
+    @property
+    def json(self):
+        """Return the JSON structure from last hotspot update"""
+        return self._json
+
+
+
 class HeliumHotspotSensor(Entity):
-    """Helium hotspot core sensor (and adds related sensors)"""
+    """Helium hotspot core sensor (adds related sensors)"""
 
     def __init__(self, hass, config, hotspot_address, helium_client, async_add_entities_callback):
-        """Initialize the Helium Hotspot service sensor."""
+        """Initialize the core Helium Hotspot sensor."""
         self.hass = hass
 
         self._address = hotspot_address
-        self._unique_id = f"helium_{hotspot_address}"
+        self._unique_id = f"helium_hotspot_{hotspot_address}"
 
-        self._managed_sensors = {}
         self._attrs = {
             ATTR_ATTRIBUTION: ATTRIBUTION,
             ATTR_ADDRESS: hotspot_address
