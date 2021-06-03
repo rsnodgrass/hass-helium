@@ -232,7 +232,7 @@ class HeliumHotspotSensor(Entity):
         self._client = helium_client
         self._async_add_entities_callback = async_add_entities_callback
 
-        self._name = hotspot_address
+        self._name = f"Helium {hotspot_address}"
         self._json = None
         self._state = None        
 
@@ -248,7 +248,7 @@ class HeliumHotspotSensor(Entity):
     @property
     def name(self):
         """Return the name of the sensor."""
-        return "Helium " + self._name
+        return self._name
 
     @property
     def state(self):
