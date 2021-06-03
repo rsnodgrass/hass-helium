@@ -44,6 +44,7 @@ sensor:
   - platform: helium
     wallets:
       - 12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+      - 14YeKFGXE23yAdACj6hu5NWEcYzzKxptYbm5jHgzw9A1P1UQfMv
 ```
 
 NOTE: By default the sensors are update from Helium Blockchain every 15 minutes. The check interval can be changed in yaml config by adding a 'scan_interval' for the sensor.

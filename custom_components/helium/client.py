@@ -6,7 +6,7 @@ import re
 import httpx
 from bs4 import BeautifulSoup
 
-from .const import CONF_TIMEOUT, DEFAULT_NAME, DEFAULT_TIMEOUT
+from .const import DEFAULT_TIMEOUT
 
 LOG = logging.getLogger(__name__)
 
