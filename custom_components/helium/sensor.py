@@ -274,7 +274,7 @@ class HeliumHotspotSensor(Entity):
             return
         self._json = json
 
-        self._name = 'Helium ' + self._json['name']
+        self._name = self._json['name']
         self._state = json['status']['online']
 
         # copy useful attributes for the hotspot
