@@ -80,7 +80,7 @@ async def async_setup_platform(hass, config, async_add_entities_cb, discovery_in
         # create the core Helium Hotspot sensor, which is responsible for updating its associated sensors
         sensors.append( HeliumHotspotSensor(hass, config, hotspot_address, client, async_add_entities_cb) )
 
-    async_add_entities_callback(sensors, True)
+    async_add_entities_cb(sensors, True)
 
 # FIXME: update price every N minutes (default 2)
 class HeliumPriceSensor(Entity):
@@ -232,16 +232,9 @@ class HeliumHotspotSensor(Entity):
         self._client = helium_client
         self._async_add_entities_callback = async_add_entities_callback
 
-        # get name from the websevice
-        json = await helium_client.async_get_hotspot_data(self._address)
-        if json:
-            self._json = json['data']
-            self._name = 'Helium ' + self._json['name']
-            self._state = self._json['status']['online']
-        else:
-            self._json = None
-            self._name = hotspot_address
-            self._state = None        
+        self._name = hotspot_address
+        self._json = None
+        self._state = None        
 
         # create all the dependent sensors
 
@@ -279,7 +272,7 @@ class HeliumHotspotSensor(Entity):
             return
         self._json = json
 
-        self._name = json['name']
+        self._name = 'Helium ' + self._json['name']
         self._state = json['status']['online']
 
         # copy useful attributes for the hotspot
