@@ -88,6 +88,10 @@ class HeliumPriceSensor(Entity):
         self._state = None
 
     @property
+    def unique_id(self):
+        return self._unique_id
+
+    @property
     def name(self):
         """Return the name of the sensor."""
         return self._name
@@ -147,6 +151,10 @@ class HeliumWalletSensor(Entity):
         self._state = None        
 
         # FIXME: create all the dependent sensors
+
+    @property
+    def unique_id(self):
+        return self._unique_id
 
     @property
     def name(self):
@@ -231,6 +239,10 @@ class HeliumHotspotSensor(Entity):
         # https://api.helium.io/v1/hotspots/{address}}/rewards/sum?min_time=2021-06-02T08:09:39Z
 
     @property
+    def unique_id(self):
+        return self._unique_id
+
+    @property
     def name(self):
         """Return the name of the sensor."""
         return "Helium " + self._name
@@ -252,7 +264,7 @@ class HeliumHotspotSensor(Entity):
         """Get the latest data from the source and updates the state."""
 
         # peel back the onion one layer to make access simpler for dependent sensors
-        json = await self._client.async_get_hotspot_data(self._address).get('data')
+        json = await self._client.async_get_hotspot_data(self._address)['data']
 
         if not json:
             return
