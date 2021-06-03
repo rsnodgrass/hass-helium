@@ -2,6 +2,7 @@
 
 # NOTE: THIS IS NOT IMPLEMENTED YET!
 
+![logo]((img/logo@2x.png))
 
 ![beta_badge](https://img.shields.io/badge/maturity-Beta-yellow.png)
 ![release_badge](https://img.shields.io/github/release/rsnodgrass/hass-helium.svg)
@@ -47,7 +48,7 @@ sensor:
       - 14YeKFGXE23yAdACj6hu5NWEcYzzKxptYbm5jHgzw9A1P1UQfMv
 ```
 
-NOTE: By default the sensors are update from Helium Blockchain every 15 minutes. The check interval can be changed in yaml config by adding a 'scan_interval' for the sensor.
+NOTE: By default, the sensors update from the Helium Blockchain every 15 minutes. This interval can be changed by adding a 'scan_interval' entry for the sensor.
 
 ### Example Lovelace UI
 
@@ -58,12 +59,14 @@ type: entities
 title: Helium
 show_header_toggle: false
 ```
+
 ## Support
 
+This is a community supported custom component integration for Home Assistant. Code improvents and Pull Requests are appreciated.
 ### Community Support
 
-* Home Assistant Community Forums
-* Helium Discord
+* [Home Assistant Community Forums](https://community.home-assistant.io/c/projects/custom-components/47)
+* [Helium Discord](https://discord.com/invite/helium)
 
 ### Feature Requests
 
