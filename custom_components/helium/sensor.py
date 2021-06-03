@@ -40,6 +40,8 @@ SCAN_INTERVAL = timedelta(minutes=15)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
+        # FIXME: rather than specifying sensor: - platform: helium, this should be under helium: domain
+        # FIXME: ensure WALLET or HOTSPOT is specified
         vol.Optional(CONF_WALLET): cv.string,
         vol.Optional(CONF_HOTSPOT): cv.string,
         vol.Optional(CONF_TIMEOUT, default=DEFAULT_TIMEOUT): cv.positive_int
