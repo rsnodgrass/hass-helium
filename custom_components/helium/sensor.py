@@ -5,13 +5,7 @@ from datetime import timedelta
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.components.sensor import PLATFORM_SCHEMA
-from homeassistant.const import (
-    ATTR_ICON,
-    ATTR_NAME,
-    ATTR_UNIT_OF_MEASUREMENT,
-    CONF_NAME,
-    CONF_URL,
-)
+from homeassistant.const import ATTR_UNIT_OF_MEASUREMENT
 from homeassistant.core import callback
 from homeassistant.exceptions import PlatformNotReady
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
@@ -116,8 +110,7 @@ class HeliumPriceSensor(Entity):
         """Get the latest data from the source and updates the state."""
 
         # trigger an update of this sensor (and all related sensors)
-        client = self._helium_client
-        json = await client.async_get_oracle_price()
+        json = await self._client.async_get_oracle_price()
 
         if json:
             data = json['data']
@@ -181,11 +174,8 @@ class HeliumWalletSensor(Entity):
     async def async_update(self):
         """Get the latest data from the source and updates the state."""
 
-        # trigger an update of this sensor (and all related sensors)
-        client = self._helium_client
-
         # peel back the onion one layer to make access simpler for dependent sensors
-        json = await client.async_get_wallet_data(self._address)['data']
+        json = await self._client.async_get_wallet_data(self._address)['data']
 
         if not json:
             return
@@ -197,6 +187,9 @@ class HeliumWalletSensor(Entity):
         copy_attributes = [ 'block', 'dc_balance' ]
         for attr in copy_attributes:
             self._attrs[attr] = json[attr]
+
+        # FIXME: trigger an update of this sensor (and all related sensors)
+
 
     @property
     def device_state_attributes(self):
