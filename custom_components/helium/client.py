@@ -44,6 +44,10 @@ class SimpleHeliumClient:
         url = WALLET_URL + address
         return await self.async_get(url)
 
+    async def async_get_wallet_hotspots(self, wallet_address):
+        url = f"https://api.helium.io/v1/accounts/{wallet_address}/hotspots"
+        return await self.async_get(url)
+
     async def async_get_oracle_price(self):
         url = ORACLE_PRICE_URL
         return await self.async_get(url)
