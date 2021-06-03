@@ -20,13 +20,33 @@ Make sure [Home Assistant Community Store (HACS)](https://github.com/custom-comp
 
 ### Configuration
 
+The bare minimum configuration creates several sensors to track the Helium blockchange, notably the HNT/USD Oracle price.
+
 ```yaml
 sensor:
   - platform: helium
-    hotspot_address:
 ```
 
-NOTE: By default this updates the state from Helium Blockchain every 15 minutes. The check interval can be changed in yaml config by adding a 'scan_interval' for the sensor.
+Individual Helium hotspots can be also be monitored:
+
+```yaml
+sensor:
+  - platform: helium
+    hotspots:
+      - 112JbKk4fvYmoSqHR93vRYugjiduT1JrF8EyC86iMUWjUrmW95Mn
+      - xx
+```
+
+And the state of Helium wallets can be monitored:
+
+```yaml
+sensor:
+  - platform: helium
+    wallets:
+      - 12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+```
+
+NOTE: By default the sensors are update from Helium Blockchain every 15 minutes. The check interval can be changed in yaml config by adding a 'scan_interval' for the sensor.
 
 ### Example Lovelace UI
 
