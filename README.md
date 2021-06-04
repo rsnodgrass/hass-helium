@@ -1,6 +1,6 @@
 # Helium Blockchain for Home Assistant
 
-![Helium Logo](https://github.com/rsnodgrass/hass-helium/blob/master/img/logo@2x.png?raw=true)
+![Helium Logo](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/logo@2x.png)
 
 ![beta_badge](https://img.shields.io/badge/maturity-Beta-yellow.png)
 ![release_badge](https://img.shields.io/github/release/rsnodgrass/hass-helium.svg)
@@ -51,7 +51,8 @@ NOTE: By default, the sensors update from the Helium Blockchain every 15 minutes
 
 Status of Helium hotspots using [uptime card](https://github.com/dylandoamaral/uptime-card):
 
-![Lovelace Price Example](https://github.com/rsnodgrass/hass-helium/blob/master/img/lovelace-hotspot-status.png?raw=true)
+![Lovelace Status Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-hotspot-status.png)
+
 
 ```yaml
 type: custom:uptime-card
@@ -75,7 +76,7 @@ name: Rough Chili Bird
 
 Track the price of Helium HNT:
 
-![Lovelace Price Example](https://github.com/rsnodgrass/hass-helium/blob/master/img/lovelace-price.png?raw=true)
+![Lovelace Price Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-price.png)
 
 ```yaml
 animate: true
