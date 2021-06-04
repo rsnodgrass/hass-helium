@@ -129,6 +129,7 @@ This is a community supported custom component integration for Home Assistant. C
 * allow auto-creating sensors for ALL hotspots for a given wallet (optionally) 
 * create sensor for current wallet value (based on Oracle HNT price)
 * create sensors or attributes for being able to display per-hotspot rewards per 24-hour, 7-day, 30-day
+* disable polling to allow dynamic scan intervals (e.g. every min for price, every 15 min for hotspot avail, every hour for wallet value)
 
 ## See Also
 
