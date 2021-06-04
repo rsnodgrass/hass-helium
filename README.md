@@ -26,7 +26,7 @@ sensor:
   - platform: helium
 ```
 
-Configure Helium hotspot sensors:
+Configure sensors for Helium hotspots:
 
 ```yaml
 sensor:
@@ -35,7 +35,7 @@ sensor:
       - 112JbKk4fvYmoSqHR93vRYugjiduT1JrF8EyC86iMUWjUrmW95Mn
 ```
 
-Configure Helium wallet sensors:
+Configure sensors for Helium wallets:
 
 ```yaml
 sensor:
