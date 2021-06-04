@@ -31,7 +31,11 @@ LOG = logging.getLogger(__name__)
 
 SCAN_INTERVAL = timedelta(minutes=15)
 
+# FIXME: use service: homeassistant.update_entity to trigger updates for different types of data
+# rather than rely on SCAN_INTERVAL defaults for ALL sensors.
+
 USD_DIVISOR = 100000000
+CURRENCY_USD = 'USD'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -60,7 +64,7 @@ async def async_setup_platform(hass, config, async_add_entities_cb, discovery_in
 
     if wallets:
         for wallet_address in wallets:
-            sensors.append( HeliumWalletSensor(hass, config, wallet_address, client, async_add_entities_cb) )
+            sensors.append( HeliumWalletSensor(hass, config, wallet_address, client, price_sensor, async_add_entities_cb) )
 
             if create_hotspot_sensors_for_wallet:
                 response = await client.async_get_wallet_hotspots(wallet_address)
@@ -108,7 +112,7 @@ class HeliumPriceSensor(Entity):
     @property
     def unit_of_measurement(self):
         """HNT Oracle price is always in USD"""
-        return 'USD'
+        return CURRENCY_USD
 
     @property
     def should_poll(self):
@@ -135,9 +139,10 @@ class HeliumPriceSensor(Entity):
 class HeliumWalletSensor(Entity):
     """Helium wallet core sensor (adds related sensors)"""
 
-    def __init__(self, hass, config, wallet_address, helium_client, async_add_entities_callback):
+    def __init__(self, hass, config, wallet_address, helium_client, price_sensor, async_add_entities_callback):
         """Initialize the Helium wallet sensor."""
         self.hass = hass
+        self._price_sensor = price_sensor
 
         self._address = wallet_address
         self._unique_id = f"helium_wallet_{wallet_address}"
@@ -201,7 +206,8 @@ class HeliumWalletSensor(Entity):
         for attr in copy_attributes:
             self._attrs[attr] = json[attr]
 
-        # FIXME: trigger an update of this sensor (and all related sensors)
+        # update USD price attribute for the current HNT value based on current Oracle HNT/USD price
+        self._attrs[CURRENCY_USD] = round(self._price_sensor.state * self._state, 2)
 
 
     @property
