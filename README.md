@@ -2,6 +2,8 @@
 
 ![Helium Logo](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/logo@2x.png)
 
+Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/544e97e6), Helium blockchain wallets, and the Helium HNT/USD Oracle price.
+
 ![beta_badge](https://img.shields.io/badge/maturity-Beta-yellow.png)
 ![release_badge](https://img.shields.io/github/release/rsnodgrass/hass-helium.svg)
 ![release_date](https://img.shields.io/github/release-date/rsnodgrass/hass-helium.svg)
@@ -10,8 +12,6 @@
 
 [![Buy Me A Coffee](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://buymeacoffee.com/DYks67r)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WREP29UDAMB6G)  
-
-Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/544e97e6), Helium blockchain wallets, and the Helium HNT/USD Oracle price.
 
 ## Installation
 
@@ -100,7 +100,7 @@ For example on custom price alerts, see [example stock alert](https://blog.kevin
 
 Helium wallet size per day over last 7 days:
 
-```
+```yaml
 entities:
   - entity: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
     name: Wallet HNT
@@ -118,16 +118,18 @@ type: custom:mini-graph-card
 ## Support
 
 This is a community supported custom component integration for Home Assistant. Code improvents and Pull Requests are appreciated.
-### Community Support
+
+#### Community Support
 
 * [Home Assistant Community Forums](https://community.home-assistant.io/c/projects/custom-components/47)
 * [Helium Discord](https://discord.com/invite/helium)
 
-### Feature Requests
+#### Feature Requests
 
 * create sensor for current wallet value (based on Oracle HNT price)
+* create sensors or attributes for being able to display per-hotspot rewards per 24-hour, 7-day, 30-day
 
-### See Also
+## See Also
 
 * [Helium](https://helium.com/)
 * [Order Helium hotspot from RAK Wireless](https://rakwireless.kckb.st/544e97e6)
