@@ -45,7 +45,8 @@ sensor:
       - 14YeKFGXE23yAdACj6hu5NWEcYzzKxptYbm5jHgzw9A1P1UQfMv
 ```
 
-NOTE: By default, the sensors update from the Helium Blockchain every 15 minutes. This interval can be changed by adding a 'scan_interval' entry for the sensor.
+NOTE: By default, the sensors update from the Helium Blockchain every 15 minutes. This interval can be changed by adding a 'scan_interval' entry for the sensor, but this effects all sensors. You can create automations to dynamically trigger more frequent of specific sensors using the '[homeassistant.update_entity](https://www.home-assistant.io/integrations/homeassistant/#service-homeassistantupdate_entity)' service call.
+
 
 ### Example Lovelace UI
 
