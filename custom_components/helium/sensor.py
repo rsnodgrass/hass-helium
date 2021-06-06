@@ -68,9 +68,8 @@ async def async_setup_platform(hass, config, async_add_entities_cb, discovery_in
 
             if create_hotspot_sensors_for_wallet:
                 response = await client.async_get_wallet_hotspots(wallet_address)
-                data = response['data']
 
-                for hotspot_info in data:
+                for hotspot_info in response['data']:
                     hotspot_address = hotspot_info['address']
                     sensors.append( HeliumHotspotSensor(hass, config, hotspot_address, client, async_add_entities_cb) )
 
