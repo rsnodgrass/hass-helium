@@ -15,7 +15,7 @@ Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/
 
 ## Installation
 
-Make sure [Home Assistant Community Store (HACS)](https://github.com/custom-components/hacs) is installed, then add the repository: `rsnodgrass/hass-helium`
+Make sure [Home Assistant Community Store (HACS)](https://github.com/custom-components/hacs) is installed. This integration is part of the default HACS store (though can also be added manually using repository: `rsnodgrass/hass-helium`)
 
 ### Configuration
 
