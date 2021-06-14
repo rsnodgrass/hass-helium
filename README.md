@@ -116,6 +116,23 @@ show:
 type: custom:mini-graph-card
 ```
 
+Total HNT added to wallet today:
+
+```yaml
+utility_meter:
+  helium_wallet_today:
+    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+    cycle: daily
+
+  helium_wallet_weekly:
+    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+    cycle: weekly
+
+  helium_wallet_monthly:
+    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+    cycle: monthly
+```
+
 ## Support
 
 This is a community supported custom component integration for Home Assistant. Code improvents and Pull Requests are appreciated.
