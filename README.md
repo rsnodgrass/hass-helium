@@ -136,7 +136,7 @@ type: custom:mini-graph-card
 
 #### Total HNT Mined Today
 
-This requires the advanced configuration above to add a utility meter for tracking today's HNT wallet amount.
+This requires the advanced configuration above to add a utility meter for tracking today's HNT wallet amount versus yesterday's wallet. This requires the `[apexcharts-card](https://github.com/RomRider/apexcharts-card)` is installed.
 
 
 ![Lovelace Today Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-mined-today.png)
