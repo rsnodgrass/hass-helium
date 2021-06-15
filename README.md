@@ -171,14 +171,14 @@ card:
         func: avg
         duration: 20min
     - entity: sensor.helium_wallet_today
-      name: HNT
+      name: Yesterday
       offset: '-24h'
       opacity: 0.2
       group_by:
         func: avg
         duration: 20min
       show:
-        in_header: false
+        in_header: true
   y_axis_precision: 0
   apex_config:
     yaxis:
