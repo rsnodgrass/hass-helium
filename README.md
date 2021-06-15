@@ -47,6 +47,24 @@ sensor:
 
 NOTE: By default, the sensors update from the Helium Blockchain every 15 minutes. This interval can be changed by adding a 'scan_interval' entry for the sensor, but this effects all sensors. You can create automations to dynamically trigger more frequent of specific sensors using the '[homeassistant.update_entity](https://www.home-assistant.io/integrations/homeassistant/#service-homeassistantupdate_entity)' service call.
 
+### Advanced Configuration
+
+This configuration.yaml setting adds a sensor to track total HNT added to wallet by day/week/month usng the [utility meter](https://www.home-assistant.io/integrations/utility_meter/) integration.
+
+```yaml
+utility_meter:
+  helium_wallet_today:
+    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+    cycle: daily
+
+  helium_wallet_weekly:
+    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+    cycle: weekly
+
+  helium_wallet_monthly:
+    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
+    cycle: monthly
+```
 
 ### Example Lovelace UI
 
@@ -116,21 +134,72 @@ show:
 type: custom:mini-graph-card
 ```
 
-Total HNT added to wallet today:
+#### Total HNT Mined Today
+
+This requires the advanced configuration above to add a utility meter for tracking today's HNT wallet amount.
+
+
+![Lovelace Today Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-mined-today.png)
 
 ```yaml
-utility_meter:
-  helium_wallet_today:
-    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
-    cycle: daily
-
-  helium_wallet_weekly:
-    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
-    cycle: weekly
-
-  helium_wallet_monthly:
-    source: sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U
-    cycle: monthly
+type: custom:config-template-card
+entities:
+  - sensor.helium_wallet_today
+card:
+  type: custom:apexcharts-card
+  header:
+    show: true
+    show_states: true
+    colorize_states: true
+    title: Helium Mined Today
+  span:
+    start: day
+  graph_span: 24h
+  all_series_config:
+    stroke_width: 4
+    type: line
+    extend_to_end: false
+    float_precision: 2
+  color_list:
+    - lightblue
+    - grey
+  series:
+    - entity: sensor.helium_wallet_today
+      name: Today
+      type: area
+      group_by:
+        func: avg
+        duration: 20min
+    - entity: sensor.helium_wallet_today
+      name: HNT
+      offset: '-24h'
+      opacity: 0.2
+      group_by:
+        func: avg
+        duration: 20min
+      show:
+        in_header: false
+  y_axis_precision: 0
+  apex_config:
+    yaxis:
+      - seriesName: HNT
+        decimalsInFloat: 0
+      - seriesName: Helium
+        show: false
+    tooltip:
+      x:
+        format: ddd dd MMM - HH:mm
+    xaxis:
+      tooltip:
+        enabled: false
+    legend:
+      show: false
+    grid:
+      borderColor: '#7B7B7B'
+    chart:
+      foreColor: '#7B7B7B'
+      toolbar:
+        show: false
 ```
 
 ## Support
