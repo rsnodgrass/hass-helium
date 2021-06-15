@@ -93,7 +93,10 @@ title_adaptive_color: true
 name: Rough Chili Bird
 ```
 
-Track the price of Helium HNT:
+
+#### HNT Price Tracking
+
+Track the price of HNT using mini-graph-card:
 
 ![Lovelace Price Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-price.png)
 
@@ -115,7 +118,27 @@ show:
 type: custom:mini-graph-card
 ```
 
-For example on custom price alerts, see [example stock alert](https://blog.kevineifinger.de/archive/2019/10/17/Using-Homeassistant-As-My-Self-Hosted-Stock-Alert.html).
+![Lovelace Price Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-mined-price-2.png)
+
+Track the price of HNT using apexchart-card:
+
+```yaml
+type: custom:apexcharts-card
+header:
+  show: true
+  title: Helium HNT/USD
+  show_states: true
+  colorize_states: true
+series:
+  - entity: sensor.helium_hnt_oracle_price
+  - entity: sensor.helium_hnt_oracle_price
+    type: column
+
+```
+
+For custom price alerts ideas, see [example stock alert](https://blog.kevineifinger.de/archive/2019/10/17/Using-Homeassistant-As-My-Self-Hosted-Stock-Alert.html).
+
+#### Helium Wallet
 
 Helium wallet size per day over last 7 days:
 
