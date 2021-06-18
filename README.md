@@ -118,7 +118,7 @@ show:
 type: custom:mini-graph-card
 ```
 
-![Lovelace Price Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-mined-price-2.png)
+![Lovelace Price Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-price-2.png)
 
 Track the price of HNT using apexchart-card:
 
@@ -155,6 +155,16 @@ show:
   icon: false
   state: true
 type: custom:mini-graph-card
+```
+
+Wallet value:
+
+```yaml
+  - platform: template
+    sensors:
+      helium_wallet_value:
+        value_template:
+          "{{ sensor.helium_hnt_oracle_price * sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U }}"  
 ```
 
 #### Total HNT Mined Today
