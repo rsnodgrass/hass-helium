@@ -118,9 +118,9 @@ show:
 type: custom:mini-graph-card
 ```
 
-![Lovelace Price Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-price-2.png)
+Track the price of HNT using [apexcharts-card](https://github.com/RomRider/apexcharts-card):
 
-Track the price of HNT using `apexcharts-card`:
+![Lovelace Price Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-price-2.png)
 
 ```yaml
 type: custom:apexcharts-card
