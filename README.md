@@ -120,7 +120,7 @@ type: custom:mini-graph-card
 
 ![Lovelace Price Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-price-2.png)
 
-Track the price of HNT using apexchart-card:
+Track the price of HNT using `apexcharts-card`:
 
 ```yaml
 type: custom:apexcharts-card
@@ -169,7 +169,7 @@ Wallet value:
 
 #### Total HNT Mined Today
 
-This requires the advanced configuration above to add a utility meter for tracking today's HNT wallet amount versus yesterday's wallet. This requires the `[apexcharts-card](https://github.com/RomRider/apexcharts-card)` is installed.
+This requires the advanced configuration above to add a utility meter for tracking today's HNT wallet amount versus yesterday's wallet. This requires the [apexcharts-card](https://github.com/RomRider/apexcharts-card).
 
 
 ![Lovelace Today Example](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/lovelace-mined-today.png)
