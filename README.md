@@ -2,7 +2,7 @@
 
 ![Helium Logo](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/logo@2x.png)
 
-Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/544e97e6), Helium blockchain wallets, and the Helium HNT/USD Oracle price.
+Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/544e97e6), Helium blockchain wallets, and the Helium HNT/USD Oracle price for [Home Assistant](https://www.home-assistant.io/).
 
 ![beta_badge](https://img.shields.io/badge/maturity-Beta-yellow.png)
 ![release_badge](https://img.shields.io/github/release/rsnodgrass/hass-helium.svg)
