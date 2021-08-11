@@ -13,6 +13,8 @@ Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/
 [![Buy Me A Coffee](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://buymeacoffee.com/DYks67r)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WREP29UDAMB6G)  
 
+Support this project, sign up for a [Crypto.com account as one of your HNT exchanges](https://platinum.crypto.com/r/a8xydwpxxj) and use referral code `a8xydwpxxj` to get $25 credit free.
+
 ## Installation
 
 Make sure [Home Assistant Community Store (HACS)](https://github.com/custom-components/hacs) is installed. This integration is part of the default HACS store (though can also be added manually using repository: `rsnodgrass/hass-helium`)
@@ -256,4 +258,4 @@ This is a community supported custom component integration for Home Assistant. C
 * [Helium](https://helium.com/)
 * [Order Helium hotspot from RAK Wireless](https://rakwireless.kckb.st/544e97e6)
 * [Koinly tax reporting](https://koinly.io?via=5CB65BB1) (supports Helium)
-* [Crypto.com - get $25 free for opening account](https://platinum.crypto.com/r/a8xydwpxxj)
+* [Crypto.com - get $25 free for opening account](https://platinum.crypto.com/r/a8xydwpxxj) - use referral code `a8xydwpxxj`
