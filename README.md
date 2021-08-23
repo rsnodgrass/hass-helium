@@ -237,13 +237,49 @@ card:
         show: false
 ```
 
+## Is there a way to change fiat currency from USD to EUR, GBP, CAD, etc?
+
+No. **By design, Helium HNT is currently tightly coupled with USD since both the Oracles are all in USD and the Helium DC (Data Credits) are all fixed to USD prices.** However, you can of course convert from the USD price to other currencies using add on sensors.
+
+For example, setting up conversion to CAD:
+
+```yaml
+sensor:
+  - platform: openexchangerates
+    name: Canadian Currency
+    api_key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    quote: CAD
+
+  - platform: template
+      sensors:
+        helium_wallet_value:
+          entity_id: sensor.helium_wallet_xxxxxxxxxxxxx, sensor.helium_hnt_oracle_price
+          value_template: "{{ ((states('sensor.helium_hnt_oracle_price') | float  * states('sensor.helium_wallet_xxxxxxxx') | float) * states('sensor.canadian_currency') | float) | round(2) }}"
+          unit_of_measurement: "CAD"
+```
+
+And a simple Lovelace display (thanks @ThaNerd):
+
+```yaml
+- type: custom:apexcharts-card
+  header:
+    show: true
+    title: Helium Wallet/CAD
+    show_states: true
+    colorize_states: true
+  series:
+    - entity: sensor.helium_wallet_value
+      name: Helium Wallet
+      type: column
+```
+
 ## Support
 
 This is a community supported custom component integration for Home Assistant. Code improvents and Pull Requests are appreciated.
 
 #### Community Support
 
-* [Home Assistant Community Forums](https://community.home-assistant.io/c/projects/custom-components/47)
+* [Home Assistant Community Forums](https://community.home-assistant.io/t/helium-blockchain-custom-component/312984)
 * [Helium Discord](https://discord.com/invite/helium)
 
 #### Feature Requests
