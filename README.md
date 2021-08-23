@@ -275,7 +275,7 @@ And a simple Lovelace display (thanks @ThaNerd):
 
 ## Support
 
-This is a community supported custom component integration for Home Assistant. Code improvents and Pull Requests are appreciated.
+This is a [community supported](https://community.home-assistant.io/t/helium-blockchain-custom-component/312984) custom component integration for Home Assistant. Code improvents and Pull Requests are appreciated.
 
 #### Community Support
 
