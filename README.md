@@ -301,7 +301,7 @@ sensor:
     name: "Bobcat Helium Sync Status"
     scan_interval: 300 # 5 min
     resource: http://<your-bobcat-lan-ip>/status.json
-    value_template: "{{value_json.data.miner_height|float}} / {{value_json.data.blockchain_height|float}}"
+    value_template: "{{value_json.miner_height|float}} / {{value_json.blockchain_height|float}}"
     unit_of_measurement: '%'
     json_attributes:
        - "status"
@@ -315,7 +315,7 @@ sensor:
     scan_interval: 300 # 5 min
     resource: http://<your-bobcat-lan-ip>/temp.json
     device_class: temperature
-    value_template: "{{value_json.data.temp0|float}}"
+    value_template: "{{value_json.temp0|float}}"
     unit_of_measurement: "°C"
 
   - platform: rest
@@ -323,7 +323,7 @@ sensor:
     scan_interval: 300 # 5 min
     resource: http://<your-bobcat-lan-ip>/temp.json
     device_class: temperature
-    value_template: "{{value_json.data.temp1|float}}"
+    value_template: "{{value_json.temp1|float}}"
     unit_of_measurement: "°C"
 ```
 
