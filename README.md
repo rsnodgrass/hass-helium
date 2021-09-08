@@ -301,14 +301,14 @@ sensor:
     name: "Bobcat Helium Sync Status"
     scan_interval: 300 # 5 min
     resource: http://<your-bobcat-lan-ip>/status.json
+    value_template: "{{value_json.data.miner_height|float}} / {{value_json.data.blockchain_height|float}}"
+    unit_of_measurement: '%'
     json_attributes:
        - "status"
        - "miner_height"
        - "blockchain_height"
        - "gap"
        - "epoch"
-    value_template: "{{value_json.data.miner_height|float}} / {{value_json.data.blockchain_height|float}}"
-    unit_of_measurement: '%'
 
   - platform: rest
     name: "Bobcat Temp 1"
