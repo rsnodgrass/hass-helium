@@ -289,6 +289,10 @@ This is a [community supported](https://community.home-assistant.io/t/helium-blo
 * create sensors or attributes for being able to display per-hotspot rewards per 24-hour, 7-day, 30-day
 * disable polling to allow dynamic scan intervals (e.g. every min for price, every 15 min for hotspot avail, every hour for wallet value)
 
+#### Out of Scope
+
+* local access to Helium hotspot status from proprietary vendor APIs (e.g. [Bobcat diagnosis interface](https://jamesachambers.com/bobcat-300-diagnoser-tool-utility-guide-helium-mining/)) -- love this idea, but this should be a separate Home Assistant integration
+
 ## See Also
 
 * [Helium](https://helium.com/)
