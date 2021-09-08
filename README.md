@@ -316,6 +316,7 @@ sensor:
     resource: http://<your-bobcat-lan-ip>/temp.json
     device_class: temperature
     value_template: "{{value_json.data.temp0|float}}"
+    unit_of_measurement: "°C"
 
   - platform: rest
     name: "Bobcat Temp 2"
@@ -323,6 +324,7 @@ sensor:
     resource: http://<your-bobcat-lan-ip>/temp.json
     device_class: temperature
     value_template: "{{value_json.data.temp1|float}}"
+    unit_of_measurement: "°C"
 ```
 
 ## See Also
