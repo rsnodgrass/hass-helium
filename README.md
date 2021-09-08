@@ -311,7 +311,7 @@ sensor:
        - "epoch"
 
   - platform: rest
-    name: "Bobcat Temp 1"
+    name: "Bobcat Temp 0"
     scan_interval: 300 # 5 min
     resource: http://<your-bobcat-lan-ip>/temp.json
     device_class: temperature
@@ -319,7 +319,7 @@ sensor:
     unit_of_measurement: "°C"
 
   - platform: rest
-    name: "Bobcat Temp 2"
+    name: "Bobcat Temp 1"
     scan_interval: 300 # 5 min
     resource: http://<your-bobcat-lan-ip>/temp.json
     device_class: temperature
