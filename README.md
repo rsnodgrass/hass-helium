@@ -293,6 +293,38 @@ This is a [community supported](https://community.home-assistant.io/t/helium-blo
 
 * local access to Helium hotspot status from proprietary vendor APIs (e.g. [Bobcat diagnosis interface](https://jamesachambers.com/bobcat-300-diagnoser-tool-utility-guide-helium-mining/)) -- love this idea, but this should be a separate Home Assistant integration
 
+Here is an example for Bobcat 300's using the [RESTful sensor](https://www.home-assistant.io/integrations/rest/):
+
+```yaml
+sensor:
+  - platform: rest
+    name: "Bobcat Helium Sync Status"
+    scan_interval: 300 # 5 min
+    resource: http://<your-bobcat-lan-ip>/status.json
+    json_attributes:
+       - "status"
+       - "miner_height"
+       - "blockchain_height"
+       - "gap"
+       - "epoch"
+    value_template: "{{value_json.data.miner_height|float}} / {{value_json.data.blockchain_height|float}}"
+    unit_of_measurement: '%'
+
+  - platform: rest
+    name: "Bobcat Temp 1"
+    scan_interval: 300 # 5 min
+    resource: http://<your-bobcat-lan-ip>/temp.json
+    device_class: temperature
+    value_template: "{{value_json.data.temp0|float}}"
+
+  - platform: rest
+    name: "Bobcat Temp 2"
+    scan_interval: 300 # 5 min
+    resource: http://<your-bobcat-lan-ip>/temp.json
+    device_class: temperature
+    value_template: "{{value_json.data.temp1|float}}"
+```
+
 ## See Also
 
 * [Helium](https://helium.com/)
