@@ -301,7 +301,7 @@ sensor:
     name: "Bobcat Helium Sync Status"
     scan_interval: 300 # 5 min
     resource: http://<your-bobcat-lan-ip>/status.json
-    value_template: "{{value_json.miner_height|float}} / {{value_json.blockchain_height|float}}"
+    value_template: "{{ (value_json.miner_height|float / value_json.blockchain_height|float) | round(2) }}"
     unit_of_measurement: '%'
     json_attributes:
        - "status"
