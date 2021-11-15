@@ -329,7 +329,7 @@ sensor:
 
 ## See Also
 
-* [Helium](https://helium.com/)
+* [Helium antennas and accessories (US)](https://fiz-tech.net/collections/all?ref=shark)
 * [Order Helium hotspot from RAK Wireless](https://rakwireless.kckb.st/544e97e6)
 * [Koinly tax reporting](https://koinly.io?via=5CB65BB1) (supports Helium)
 * [Crypto.com - get $25 free for opening account](https://platinum.crypto.com/r/a8xydwpxxj) - use referral code `a8xydwpxxj`
