@@ -312,7 +312,7 @@ sensor:
 
   - platform: rest
     name: "Bobcat Temp 0"
-    scan_interval: 300 # 5 min
+    scan_interval: 305 # 5 min + 5 seconds
     resource: http://<your-bobcat-lan-ip>/temp.json
     device_class: temperature
     value_template: "{{value_json.temp0|float}}"
@@ -320,7 +320,7 @@ sensor:
 
   - platform: rest
     name: "Bobcat Temp 1"
-    scan_interval: 300 # 5 min
+    scan_interval: 310 # 5 min + 10 seconds
     resource: http://<your-bobcat-lan-ip>/temp.json
     device_class: temperature
     value_template: "{{value_json.temp1|float}}"
@@ -333,6 +333,7 @@ sensor:
     value_template: "{{value_json.led}}"
     unit_of_measurement: "color"
 ```
+Note: If you make multiple calls on bobcat API, make sure that you make unsynchronized calls in order to avoid the bobcat API error 'rate limit exceeded'.
 
 ## See Also
 
