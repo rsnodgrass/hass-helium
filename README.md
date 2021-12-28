@@ -325,6 +325,13 @@ sensor:
     device_class: temperature
     value_template: "{{value_json.temp1|float}}"
     unit_of_measurement: "°C"
+
+  - platform: rest
+    name: "Bobcat Light"
+    scan_interval: 300 # 5 min
+    resource: http://<your-bobcat-lan-ip>/led.json
+    value_template: "{{value_json.led}}"
+    unit_of_measurement: "color"
 ```
 
 ## See Also
