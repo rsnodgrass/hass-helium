@@ -166,7 +166,7 @@ Wallet value:
     sensors:
       helium_wallet_value:
         value_template:
-          "{{ (states('sensor.helium_hnt_oracle_price') |float * states('sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U') | float) | round(2) }}"  
+          "{{ (states('sensor.helium_hnt_oracle_price') |float(0) * states('sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U') | float(0)) | round(2) }}"  
 ```
 
 #### Total HNT Mined Today
@@ -254,7 +254,7 @@ sensor:
       sensors:
         helium_wallet_value:
           entity_id: sensor.helium_wallet_xxxxxxxxxxxxx, sensor.helium_hnt_oracle_price
-          value_template: "{{ ((states('sensor.helium_hnt_oracle_price') | float  * states('sensor.helium_wallet_xxxxxxxx') | float) * states('sensor.canadian_currency') | float) | round(2) }}"
+          value_template: "{{ ((states('sensor.helium_hnt_oracle_price') | float(0)  * states('sensor.helium_wallet_xxxxxxxx') | float(0)) * states('sensor.canadian_currency') | float(0)) | round(2) }}"
           unit_of_measurement: "CAD"
 ```
 
