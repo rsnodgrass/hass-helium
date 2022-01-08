@@ -166,7 +166,7 @@ Wallet value:
     sensors:
       helium_wallet_value:
         value_template:
-          "{{ sensor.helium_hnt_oracle_price * sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U }}"  
+          "{{ (states('sensor.helium_hnt_oracle_price') |float * states('sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U') | float) | round(2) }}"  
 ```
 
 #### Total HNT Mined Today
