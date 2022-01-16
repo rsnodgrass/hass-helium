@@ -153,7 +153,8 @@ class HeliumWalletSensor(Entity):
 
         self._attrs = {
             ATTR_ATTRIBUTION: ATTRIBUTION,
-            ATTR_ADDRESS: wallet_address
+            ATTR_ADDRESS: wallet_address,
+            'ht': 'https://heliumtracker.io/invite/5119'
         }
 
         self._client = helium_client
@@ -240,7 +241,8 @@ class HeliumHotspotSensor(Entity):
 
         self._attrs = {
             ATTR_ATTRIBUTION: ATTRIBUTION,
-            ATTR_ADDRESS: hotspot_address
+            ATTR_ADDRESS: hotspot_address,
+            'ht': 'https://heliumtracker.io/invite/5119'
         }
 
         self._client = helium_client
