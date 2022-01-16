@@ -137,9 +137,7 @@ class HeliumPriceSensor(Entity):
     @property
     def extra_state_attributes(self):
         """Return the any attributes."""
-        attributes = super().extra_state_attributes
-        attributes.update(self._attrs)
-        return attributes
+        return self._attrs
 
 
 class HeliumWalletSensor(Entity):
@@ -222,9 +220,7 @@ class HeliumWalletSensor(Entity):
     @property
     def extra_state_attributes(self):
         """Return the any state attributes."""
-        attributes = super().extra_state_attributes
-        attributes.update(self._attrs)
-        return attributes
+        return self._attrs
 
     @property
     def json(self):
@@ -309,9 +305,7 @@ class HeliumHotspotSensor(Entity):
     @property
     def extra_state_attributes(self):
         """Return the any state attributes."""
-        attributes = super().extra_state_attributes
-        attributes.update(self._attrs)
-        return attributes
+        return self._attrs
 
     @property
     def json(self):
@@ -357,9 +351,7 @@ class DependentSensor(RestoreEntity):
     @property
     def extra_state_attributes(self):
         """Return the any state attributes."""
-        attributes = super().extra_state_attributes
-        attributes.update(self._attrs)
-        return attributes
+        return self._attrs
 
 class UpdatableSensor(RestoreEntity):
     """Representation of a sensor whose state is kept up-to-date by an external data source."""
@@ -403,9 +395,7 @@ class UpdatableSensor(RestoreEntity):
     @property
     def extra_state_attributes(self):
         """Return the any state attributes."""
-        attributes = super().extra_state_attributes
-        attributes.update(self._attrs)
-        return attributes
+        return self._attrs
 
     @property
     def icon(self):
