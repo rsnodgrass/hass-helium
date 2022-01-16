@@ -37,7 +37,7 @@ SCAN_INTERVAL = timedelta(minutes=15)
 USD_DIVISOR = 100000000
 CURRENCY_USD = 'USD'
 
-CONF_PREFIX = 'helium_prefix'
+#CONF_PREFIX = 'helium_prefix'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -45,7 +45,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
         # FIXME: ensure WALLET or HOTSPOT is specified
         vol.Optional(CONF_WALLET): [cv.string],
         vol.Required(CONF_HOTSPOT): [cv.string],
-        vol.Optional(CONF_PREFIX, default=True): [cv.boolean],
+#        vol.Optional(CONF_PREFIX, default=True): [cv.boolean],
         vol.Optional(CONF_TIMEOUT, default=DEFAULT_TIMEOUT): cv.positive_int
     }
 )
