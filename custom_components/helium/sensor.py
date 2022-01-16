@@ -135,9 +135,11 @@ class HeliumPriceSensor(Entity):
             self._attrs[ATTR_BLOCK] = int(data['block'])
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the any attributes."""
-        return self._attrs
+        attributes = super().extra_state_attributes
+        attributes.update(self._attrs)
+        return attributes
 
 
 class HeliumWalletSensor(Entity):
@@ -218,9 +220,11 @@ class HeliumWalletSensor(Entity):
 
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the any state attributes."""
-        return self._attrs
+        attributes = super().extra_state_attributes
+        attributes.update(self._attrs)
+        return attributes
 
     @property
     def json(self):
@@ -303,9 +307,11 @@ class HeliumHotspotSensor(Entity):
         # FIXME: trigger dependancies to update
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the any state attributes."""
-        return self._attrs
+        attributes = super().extra_state_attributes
+        attributes.update(self._attrs)
+        return attributes
 
     @property
     def json(self):
@@ -349,10 +355,11 @@ class DependentSensor(RestoreEntity):
         return True  # FIXME: get scheduled updates working below
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the any state attributes."""
-        return self._attrs
-
+        attributes = super().extra_state_attributes
+        attributes.update(self._attrs)
+        return attributes
 
 class UpdatableSensor(RestoreEntity):
     """Representation of a sensor whose state is kept up-to-date by an external data source."""
@@ -394,9 +401,11 @@ class UpdatableSensor(RestoreEntity):
         return self._state
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the any state attributes."""
-        return self._attrs
+        attributes = super().extra_state_attributes
+        attributes.update(self._attrs)
+        return attributes
 
     @property
     def icon(self):
