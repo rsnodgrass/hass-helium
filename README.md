@@ -342,3 +342,4 @@ Note: If you make multiple calls on bobcat API, make sure that you make unsynchr
 * [Order Helium hotspot from RAK Wireless](https://rakwireless.kckb.st/544e97e6)
 * [Koinly tax reporting](https://koinly.io?via=5CB65BB1) (supports Helium)
 * [Crypto.com - get $25 free for opening account](https://platinum.crypto.com/r/a8xydwpxxj) - use referral code `a8xydwpxxj`
+* [Amazing Apple Watch Helium widgets using hass-helium](https://community.home-assistant.io/t/helium-blockchain-custom-component/312984/35?u=ryans)
