@@ -335,6 +335,12 @@ sensor:
 ```
 Note: If you make multiple calls on bobcat API, make sure that you make unsynchronized calls in order to avoid the bobcat API error 'rate limit exceeded'.
 
+## Apple Watch Extensions
+
+[Amazing Apple Watch Helium widgets by Neil Williams using this hass-helium integration](https://community.home-assistant.io/t/helium-blockchain-custom-component/312984/35)
+
+![Apple Watch Example](https://community-assets.home-assistant.io/original/4X/6/2/e/62ea9f9e54cf5df8e1a081acd7595efc7e790105.png)
+
 ## See Also
 
 * [Helium antennas and accessories (US)](https://fiz-tech.net/collections/all?ref=shark)
@@ -342,4 +348,4 @@ Note: If you make multiple calls on bobcat API, make sure that you make unsynchr
 * [Order Helium hotspot from RAK Wireless](https://rakwireless.kckb.st/544e97e6)
 * [Koinly tax reporting](https://koinly.io?via=5CB65BB1) (supports Helium)
 * [Crypto.com - get $25 free for opening account](https://platinum.crypto.com/r/a8xydwpxxj) - use referral code `a8xydwpxxj`
-* [Amazing Apple Watch Helium widgets using hass-helium](https://community.home-assistant.io/t/helium-blockchain-custom-component/312984/35?u=ryans)
+
