@@ -214,8 +214,10 @@ class HeliumWalletSensor(Entity):
             self._attrs[attr] = json[attr]
 
         # update USD price attribute for the current HNT value based on current Oracle HNT/USD price
-        self._attrs[CURRENCY_USD] = round(self._price_sensor.state * self._state, 2)
-
+        if self._state and self._price_sensor.state:
+            self._attrs[CURRENCY_USD] = round(self._price_sensor.state * self._state, 2)
+        else
+            self._attrs.pop(CURRENCY_USD)
 
     @property
     def extra_state_attributes(self):
