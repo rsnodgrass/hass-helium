@@ -155,7 +155,7 @@ class HeliumWalletSensor(Entity):
             ATTR_ATTRIBUTION: ATTRIBUTION,
             ATTR_ADDRESS: wallet_address,
             'tracker': 'https://heliumtracker.io/invite/5119',
-            'hotspotty': 'https://app.hotspotty.net/workspace/wallets?ref=lsbjxqqemu'
+            'hotspotty': 'https://app.hotspotty.net/workspace/wallets?ref=helium'
         }
 
         self._client = helium_client
@@ -246,7 +246,7 @@ class HeliumHotspotSensor(Entity):
             ATTR_ATTRIBUTION: ATTRIBUTION,
             ATTR_ADDRESS: hotspot_address,
             'tracker': 'https://heliumtracker.io/invite/5119',
-            'hotspotty': f"https://app.hotspotty.net/hotspots/{hotspot_address}?ref=lsbjxqqemu"
+            'hotspotty': f"https://app.hotspotty.net/hotspots/{hotspot_address}?ref=helium"
         }
 
         self._client = helium_client
