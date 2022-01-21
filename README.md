@@ -344,7 +344,7 @@ Note: If you make multiple calls on bobcat API, make sure that you make unsynchr
 ## See Also
 
 * [Helium antennas and accessories (US)](https://fiz-tech.net/collections/all?ref=shark)
-* [HeliumTracker](https://www.heliumtracker.io/invite/5119) - excellent hotspot tracker
+* [HeliumTracker](https://www.heliumtracker.io/invite/5119) and [HotSpotty](https://app.hotspotty.net/?ref=lsbjxqqemu) - excellent hotspot tracker
 * [Order Helium hotspot from RAK Wireless](https://rakwireless.kckb.st/544e97e6)
 * [Koinly tax reporting](https://koinly.io?via=5CB65BB1) (supports Helium)
 * [Crypto.com - get $25 free for opening account](https://platinum.crypto.com/r/a8xydwpxxj) - use referral code `a8xydwpxxj`

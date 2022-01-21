@@ -154,7 +154,8 @@ class HeliumWalletSensor(Entity):
         self._attrs = {
             ATTR_ATTRIBUTION: ATTRIBUTION,
             ATTR_ADDRESS: wallet_address,
-            'ht': 'https://heliumtracker.io/invite/5119'
+            'tracker': 'https://heliumtracker.io/invite/5119',
+            'hotspotty': 'https://app.hotspotty.net/workspace/wallets?ref=lsbjxqqemu'
         }
 
         self._client = helium_client
@@ -162,7 +163,7 @@ class HeliumWalletSensor(Entity):
 
         self._json = None
         self._name = f"Helium Wallet {wallet_address}"
-        self._state = None        
+        self._state = None
 
         # FIXME: create all the dependent sensors
 
@@ -244,7 +245,8 @@ class HeliumHotspotSensor(Entity):
         self._attrs = {
             ATTR_ATTRIBUTION: ATTRIBUTION,
             ATTR_ADDRESS: hotspot_address,
-            'ht': 'https://heliumtracker.io/invite/5119'
+            'tracker': 'https://heliumtracker.io/invite/5119',
+            'hotspotty': f"https://app.hotspotty.net/hotspots/{hotspot_address}?ref=lsbjxqqemu"
         }
 
         self._client = helium_client
