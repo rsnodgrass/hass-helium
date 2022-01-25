@@ -246,7 +246,7 @@ class HeliumHotspotSensor(Entity):
             ATTR_ATTRIBUTION: ATTRIBUTION,
             ATTR_ADDRESS: hotspot_address,
             'tracker': 'https://heliumtracker.io/invite/5119',
-            'hotspotty': f"https://app.hotspotty.net/hotspots/{hotspot_address}?ref=helium"
+            'hotspotty': f"https://app.hotspotty.net/hotspots/{hotspot_address}/status?ref=helium"
         }
 
         self._client = helium_client
