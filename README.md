@@ -13,7 +13,7 @@ Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/
 [![Buy Me A Coffee](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://buymeacoffee.com/DYks67r)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WREP29UDAMB6G)  
 
-Support this project, sign up for a [Crypto.com account as one of your HNT exchanges](https://platinum.crypto.com/r/a8xydwpxxj) and use referral code `a8xydwpxxj` to get a free $25 credit.
+**Ready for taxes!? [Save $20 on Koinly](https://koinly.io/?via=5CB65BB1)**
 
 ## Installation
 
