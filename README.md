@@ -4,6 +4,9 @@
 
 Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/544e97e6), Helium blockchain wallets, and the Helium HNT/USD Oracle price for [Home Assistant](https://www.home-assistant.io/). For more detailed metrics, [HeliumTracker](https://heliumtracker.io/invite/5119) gives more detailed analytics over time including dashboards for your hosts.
 
+**READY FOR TAXES!? [Save $20 on Koinly](https://koinly.io/?via=5CB65BB1)**
+
+
 ![beta_badge](https://img.shields.io/badge/maturity-Beta-yellow.png)
 ![release_badge](https://img.shields.io/github/release/rsnodgrass/hass-helium.svg)
 ![release_date](https://img.shields.io/github/release-date/rsnodgrass/hass-helium.svg)
@@ -12,8 +15,6 @@ Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/
 
 [![Buy Me A Coffee](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://buymeacoffee.com/DYks67r)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WREP29UDAMB6G)  
-
-**Ready for taxes!? [Save $20 on Koinly](https://koinly.io/?via=5CB65BB1)**
 
 ## Installation
 
