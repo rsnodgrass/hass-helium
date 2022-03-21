@@ -1,7 +1,7 @@
 {
     "domain": "helium",
     "name": "Helium Blockchain",
-    "version": "0.3.7",
+    "version": "0.3.8",
     "documentation": "https://github.com/rsnodgrass/hass-helium/",
     "issue_tracker": "https://github.com/rsnodgrass/hass-helium/issues",
     "requirements": [
