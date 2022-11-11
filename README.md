@@ -14,7 +14,7 @@ Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 [![Buy Me A Coffee](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://buymeacoffee.com/DYks67r)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WREP29UDAMB6G)  
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WREP29UDAMB6G)
 
 ## Installation
 
@@ -167,7 +167,7 @@ Wallet value:
     sensors:
       helium_wallet_value:
         value_template:
-          "{{ (states('sensor.helium_hnt_oracle_price') |float(0) * states('sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U') | float(0)) | round(2) }}"  
+          "{{ (states('sensor.helium_hnt_oracle_price') |float(0) * states('sensor.helium_wallet_12ywrqqzeNFwSMvCcaohpVdiwEeK4NZChtL9rs7dhKYd85fKG9U') | float(0)) | round(2) }}"
 ```
 
 #### Total HNT Mined Today
@@ -285,7 +285,7 @@ This is a [community supported](https://community.home-assistant.io/t/helium-blo
 
 #### Feature Requests
 
-* allow auto-creating sensors for ALL hotspots for a given wallet (optionally) 
+* allow auto-creating sensors for ALL hotspots for a given wallet (optionally)
 * create sensor for current wallet value (based on Oracle HNT price)
 * create sensors or attributes for being able to display per-hotspot rewards per 24-hour, 7-day, 30-day
 * disable polling to allow dynamic scan intervals (e.g. every min for price, every 15 min for hotspot avail, every hour for wallet value)

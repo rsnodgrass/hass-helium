@@ -1,6 +1,4 @@
-import asyncio
 import logging
-import re
 
 import httpx
 from bs4 import BeautifulSoup
