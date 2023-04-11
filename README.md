@@ -2,6 +2,8 @@
 
 ![Helium Logo](https://raw.githubusercontent.com/rsnodgrass/hass-helium/main/img/logo@2x.png)
 
+**NOTE: This integration ONLY WORKS on the ORIGINAL Helium blockchain, and will no longer work once Helium migrates to the Solana blockchain.**
+
 Sensors for monitoring individual [Helium hotspots](https://rakwireless.kckb.st/544e97e6), Helium blockchain wallets, and the Helium HNT/USD Oracle price for [Home Assistant](https://www.home-assistant.io/). For more detailed metrics, [HeliumTracker](https://heliumtracker.io/invite/5119) gives more detailed analytics over time including dashboards for your hosts.
 
 **READY FOR TAXES!? [Save $20 on Koinly](https://koinly.io/?via=5CB65BB1)**
